@@ -36,7 +36,6 @@ error(int code)
             printf("address points outside the users space"); break;
         case ELOOP:
             printf("too many symbolic links in address"); break;
-            //case ENAMETOOLONG: // TODO: not needed
         case ENOENT:
             printf("insufficient kernel memory available"); break;
         case ENOMEM:
@@ -60,7 +59,8 @@ main(int argc, char *argv[])
 
     if (argc < 3)
         help();
-
+    
+    // TODO: validate arguments
     char *filename = argv[1];
     char *msg = argv[2];
 
@@ -75,7 +75,7 @@ main(int argc, char *argv[])
     if (connect(sock, (struct sockaddr*)&addr, sizeof(addr)))
         error(errno);
 
-    write(sock, msg, 4);
+    write(sock, msg, strlen(msg));
 
     close(sock);
 }
