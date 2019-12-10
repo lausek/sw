@@ -30,37 +30,7 @@ error(int code)
     if (!code)
         return;
 
-    printf("Error %d: ", code);
-    switch (code) {
-        case SW_EOPEN:
-            printf("socket couldn't be opened"); break;
-        case SW_EMISSING:
-            printf("missing value"); break;
-        case EACCES:
-        case EPERM:
-            printf("the address is protected and user is not root"); break;
-        case EADDRINUSE:
-            printf("the given address is already in use"); break;
-        case ECONNREFUSED:
-            printf("connection refused"); break;
-        case EBADF:
-            printf("socket is not a valid file descriptor"); break;
-        case EFAULT:
-            printf("address points outside the users space"); break;
-        case ELOOP:
-            printf("too many symbolic links in address"); break;
-        case ENOENT:
-            printf("no such file or directory"); break;
-        case ENOMEM:
-            printf("insufficient kernel memory available"); break;
-        case ENOTDIR:
-            printf("a component of the path is not a direcotry"); break;
-        case EROFS:
-            printf("the socket inode resides on a read-only filesystem"); break;
-        default:
-            printf("unknown error"); break;
-    }
-
+    perror("Error");
     exit(1);
 }
 
